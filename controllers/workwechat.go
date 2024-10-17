@@ -18,8 +18,12 @@ func SendWorkWechat(agentid,agentsecret,touser, toparty, totag, msg, logsign str
 		return "workwechat未配置未开启状态,请先配置open-workwechat为1"
 	}
 	cropid := beego.AppConfig.String("WorkWechat_CropID")
-	//agentid, _ := beego.AppConfig.Int64("WorkWechat_AgentID")
-	//agentsecret := beego.AppConfig.String("WorkWechat_AgentSecret")
+	if agentid == "" {
+		agentid, _ := beego.AppConfig.Int64("WorkWechat_AgentID")
+	}
+	if agentsecret == "" {
+		agentsecret := beego.AppConfig.String("WorkWechat_AgentSecret")
+	}
 
 	//touser := beego.AppConfig.String("WorkWechat_ToUser")
 	//toparty := beego.AppConfig.String("WorkWechat_ToParty")
@@ -27,12 +31,10 @@ func SendWorkWechat(agentid,agentsecret,touser, toparty, totag, msg, logsign str
 
 	workwxapi := workwxbot.Client{
 		CropID:      cropid,
-//		AgentID:     agentid,
-//		AgentSecret: agentsecret,
+		AgentID:     agentid,
+		AgentSecret: agentsecret,
 	}
 	workwxmsg := workwxbot.Message{
-		AgentID:   agentid,
-		AgentSecret:   agentsecret,
 		ToUser:   touser,
 		ToParty:  toparty,
 		ToTag:    totag,

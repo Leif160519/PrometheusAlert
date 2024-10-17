@@ -66,7 +66,7 @@ type PrometheusAlertMsg struct {
 	Fsurl              string
 	Phone              string
 	WebHookUrl         string
-	AgentID            string
+	AgentID            int64
 	AgentSecret        string
 	ToUser             string
 	Email              string
@@ -140,7 +140,7 @@ func (c *PrometheusAlertController) PrometheusAlert() {
 	// webhookContenType, rr, split, workwechat 是单个值，因此不写入告警组。
 	pMsg.WebhookContentType = c.Input().Get("webhookContentType")
 
-	pMsg.AgentID = checkURL(c.Input().Get("wxagentid"), beego.AppConfig.String("WorkWechat_AgentID"))
+	pMsg.AgentID = checkURL(c.Input().Get("wxagentid"), beego.AppConfig.Int64("WorkWechat_AgentID"))
 	pMsg.AgentSecret = checkURL(c.Input().Get("wxagentsecret"), beego.AppConfig.String("WorkWechat_AgentSecret"))
 	pMsg.ToUser = checkURL(c.Input().Get("wxuser"), beego.AppConfig.String("WorkWechat_ToUser"))
 	pMsg.ToParty = checkURL(c.Input().Get("wxparty"), beego.AppConfig.String("WorkWechat_ToUser"))
