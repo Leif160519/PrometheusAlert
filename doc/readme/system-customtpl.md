@@ -152,7 +152,7 @@ receivers:
 - name: 'prometheusalert-all'
   webhook_configs:
   - url: 'http://[prometheusalert_url]:8080/prometheusalert?type=dd&tpl=prometheus-dd&ddurl=钉钉机器人地址'
-  #注意：url参数中 ddurl、wxurl、fsurl、phone、email、wxuser、wxparty、wxtag、groupid等可不写，如不写这些参数，则会默认去读取配置文件中的对应参数发送消息
+  #注意：url参数中 ddurl、wxurl、fsurl、phone、email、wxagentid,wxagentsecret、wxuser、wxparty、wxtag、groupid等可不写，如不写这些参数，则会默认去读取配置文件中的对应参数发送消息
 ```
 
 ![dashboard-tpl-list](../images/template.png)

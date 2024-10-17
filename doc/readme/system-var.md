@@ -6,7 +6,7 @@
 `示例：http://[prometheusalert_url]:8080/prometheusalert?type=dd&tpl=prometheus-dd&ddurl=https://oapi.dingtalk.com/robot/send?access_token=xxxx&at= 1539510xxxx`
 
 
-#### 2.url参数中 `ddurl、wxurl、fsurl、phone、email、wxuser、wxparty、wxtag、groupid `等可不写，如不写这些参数，则会默认去读取配置文件中的对应参数发送消息。
+#### 2.url参数中 `ddurl、wxurl、fsurl、phone、email、wxagentid、wxagentsecret、wxuser、wxparty、wxtag、groupid `等可不写，如不写这些参数，则会默认去读取配置文件中的对应参数发送消息。
 
 `示例：http://[prometheusalert_url]:8080/prometheusalert?type=dd&tpl=prometheus-dd`
 

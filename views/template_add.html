@@ -152,6 +152,22 @@
 				  </div>
 				</div>
 
+				<div id="AgentID" class="col-sm-6" style="display:none">
+				  <!-- text input -->
+				  <div class="form-group">
+					<label id="typestr">应用ID</label>
+					<input type="text" id="pagentid" class="form-control" name="pagentid" value="">
+				  </div>
+				</div>
+
+				<div id="AgentSecret" class="col-sm-6" style="display:none">
+				  <!-- text input -->
+				  <div class="form-group">
+					<label id="typestr">应用secret</label>
+					<input type="text" id="pagentsecret" class="form-control" name="pagentsecret" value="">
+				  </div>
+				</div>
+
 				<div id="Party" class="col-sm-6" style="display:none">
 				  <!-- text input -->
 				  <div class="form-group">
@@ -274,6 +290,8 @@ function typeChange(){
 	typeStr.innerText="接受用户";
 	document.getElementById("Purl").style.display="";
 	document.getElementById("Pat").style.display="none";
+	document.getElementById("AgentID").style.display="";
+	document.getElementById("AgentSecret").style.display="";
 	document.getElementById("Party").style.display="";
 	document.getElementById("Tag").style.display="";
     document.getElementById("contentTypeLabel").style.display="none";
@@ -333,6 +351,8 @@ function sendtest(){
 	var upjson=document.getElementById("pjson");
 	var upurl=document.getElementById("purl");
 	var upat=document.getElementById("pat");
+	var upagentid=document.getElementById("pagentid");
+	var upagentsecret=document.getElementById("pagentsecret");
 	var upparty=document.getElementById("pparty");
 	var uptag=document.getElementById("ptag");
 	var ucontentType=document.getElementById("contentType")
@@ -352,7 +372,7 @@ function sendtest(){
 	} else if(utype.value=="rl"){
 	   sendurl='{{ urlfor "PrometheusAlertController.PrometheusAlert"}}?type='+utype.value+'&tpl='+uname.value+'&groupid='+upurl.value;
 	} else if(utype.value=="workwechat"){
-	   sendurl='{{ urlfor "PrometheusAlertController.PrometheusAlert"}}?type='+utype.value+'&tpl='+uname.value+'&wxuser='+upurl.value+'&wxparty='+upparty.value+'&wxtag='+uptag.value;
+	   sendurl='{{ urlfor "PrometheusAlertController.PrometheusAlert"}}?type='+utype.value+'&tpl='+uname.value+'&wxuser='+upurl.value+'&wxparty='+upparty.value+'&wxtag='+uptag.value+'&agentid'=upagentid.value+'&agentsecret'=upagentsecret.value;
 	} else if(utype.value=="kafka"){
 		sendurl='{{ urlfor "PrometheusAlertController.PrometheusAlert"}}?type='+utype.value+'&tpl='+uname.value;
 	} else{

@@ -66,6 +66,8 @@ type PrometheusAlertMsg struct {
 	Fsurl              string
 	Phone              string
 	WebHookUrl         string
+	AgentID            string
+	AgentSecret        string
 	ToUser             string
 	Email              string
 	ToParty            string
@@ -138,6 +140,8 @@ func (c *PrometheusAlertController) PrometheusAlert() {
 	// webhookContenType, rr, split, workwechat 是单个值，因此不写入告警组。
 	pMsg.WebhookContentType = c.Input().Get("webhookContentType")
 
+	pMsg.AgentID = checkURL(c.Input().Get("wxagentid"), beego.AppConfig.String("WorkWechat_AgentID"))
+	pMsg.AgentSecret = checkURL(c.Input().Get("wxagentsecret"), beego.AppConfig.String("WorkWechat_AgentSecret"))
 	pMsg.ToUser = checkURL(c.Input().Get("wxuser"), beego.AppConfig.String("WorkWechat_ToUser"))
 	pMsg.ToParty = checkURL(c.Input().Get("wxparty"), beego.AppConfig.String("WorkWechat_ToUser"))
 	pMsg.ToTag = checkURL(c.Input().Get("wxtag"), beego.AppConfig.String("WorkWechat_ToUser"))
@@ -514,7 +518,7 @@ func SendMessagePrometheusAlert(message string, pmsg *PrometheusAlertMsg, logsig
 		ReturnMsg += SendTG(message, logsign)
 	// Workwechat
 	case "workwechat":
-		ReturnMsg += SendWorkWechat(pmsg.ToUser, pmsg.ToParty, pmsg.ToTag, message, logsign)
+		ReturnMsg += SendWorkWechat(pmsg.AgentID, pmsg.AgentSecret, pmsg.ToUser, pmsg.ToParty, pmsg.ToTag, message, logsign)
 	//百度Hi(如流)
 	case "rl":
 		ReturnMsg += PostToRuLiu(pmsg.GroupId, message, beego.AppConfig.String("BDRL_URL"), logsign)
